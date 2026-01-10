@@ -1,21 +1,25 @@
 pipeline {
-    agent any
-    
+    agent {
+        // Usamos una imagen de Go para no tener que instalar Go manualmente en Jenkins
+        docker { image 'golang:1.25.5' }
+    }
     stages {
-        stage('Limpiar y Clonar') {
+        stage('Limpieza y Checkout') {
             steps {
-                // Borra todo el contenido de la carpeta de trabajo actual
-                deleteDir()
-                
-                // Clona manualmente el repositorio
-                sh 'git clone https://github.com/rootbean/example_go_jenkins.git .'
+                // Esto fuerza a borrar todo y clonar de nuevo
+                deleteDir() 
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'go build -o mi-app'
             }
         }
         stage('Test') {
             steps {
-                // Verificamos que estamos en una carpeta git
-                sh 'git status'
-                sh 'docker run --rm -v $(pwd):/app -w /app golang:1.22-alpine go test -v ./...'
+                // Ejecuta los tests y genera un reporte básico
+                sh 'go test -v ./...'
             }
         }
     }
