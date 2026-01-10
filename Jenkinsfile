@@ -1,7 +1,7 @@
 pipeline {
     agent {
         // Usamos una imagen de Go para no tener que instalar Go manualmente en Jenkins
-        docker { image 'golang:1.25.5' }
+        docker { image 'golang:1.25' }
     }
     stages {
         stage('Build') {
