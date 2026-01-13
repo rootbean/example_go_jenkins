@@ -38,7 +38,8 @@ pipeline {
         stage('Test') {
             steps {
                 // Si esto falla, el deploy nunca ocurre
-                sh 'docker run --rm -v "$(pwd)":/app -w /app golang:1.25.5-alpine /bin/sh -c "ls -la && go test -v ."'
+                // Intenta usar la variable de entorno de Jenkins para la ruta
+                sh "docker run --rm -v ${WORKSPACE}:/app -w /app golang:1.25.5-alpine go test -v ."
             }
         }
 
