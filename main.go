@@ -10,8 +10,9 @@ func Sumar(a, b int) int {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Ruber in Go v2\n")
-	fmt.Fprintf(w, "La suma de 5 + 5 es: %d\n", Sumar(5, 5))
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	fmt.Fprintf(w, "<h1>Ruber in Go v2</h1>\n")
+	fmt.Fprintf(w, "<p>La suma de 5 + 5 es: <strong>%d</strong></p>\n", Sumar(5, 5))
 }
 
 func iniciarServidor() {
