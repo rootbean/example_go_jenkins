@@ -30,6 +30,11 @@ pipeline {
                             echo "Instalando Git..."
                             apk add --no-cache git
                         fi
+                        if [ -f /etc/alpine-release ]; then
+                            apk add --no-cache docker-cli git curl
+                        else
+                            apt-get update && apt-get install -y docker.io git curl
+                        fi
                     '''
                 }
             }
