@@ -37,10 +37,8 @@ pipeline {
       
         stage('Test') {
             steps {
-                // 1. Verificamos que los archivos estén ahí
-                sh 'ls -la'
                 // Si esto falla, el deploy nunca ocurre
-                sh 'docker run --rm -v "$(pwd)":/app -w /app golang:1.25.5-alpine go test -v .'
+                sh 'docker run --rm -v "$(pwd)":/app -w /app golang:1.25.5-alpine /bin/sh -c "ls -la && go test -v ."'
             }
         }
 
