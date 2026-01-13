@@ -37,9 +37,9 @@ pipeline {
       
         stage('Test') {
             steps {
-                // Si esto falla, el deploy nunca ocurre
-                // Intenta usar la variable de entorno de Jenkins para la ruta
-                sh "docker run --rm -v ${WORKSPACE}:/app -w /app golang:1.25.5-alpine go test -v ."
+                sh 'docker build -t app-test -f Dockerfile .'
+
+                sh 'docker run --rm app-test go test -v .'
             }
         }
 
