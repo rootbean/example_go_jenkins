@@ -62,7 +62,7 @@ pipeline {
                     
                     // 2. Ejecutar el nuevo contenedor
                     // -d lo corre en segundo plano, -p mapea el puerto (ej. 8080 de la app al 9090 del Mac)
-                    sh "docker run -d --name my-running-app -p 9090:8080 ${IMAGE_NAME}:${TAG}"
+                    sh "docker run -d --name my-running-app -p 9090:8089 ${IMAGE_NAME}:${TAG}"
                     
                     echo "✅ Despliegue completado. App disponible en http://localhost:9090"
                 }

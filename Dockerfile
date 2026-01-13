@@ -40,7 +40,7 @@ RUN chown appuser:appgroup /home/appuser/mi-app
 USER appuser
 
 # Expose the application port
-EXPOSE 8080
+EXPOSE 8089
 
 # Command to run the application
 ENTRYPOINT ["./mi-app"]
