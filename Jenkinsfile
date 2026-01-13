@@ -71,9 +71,9 @@ pipeline {
                     
                     // 2. Ejecutar el nuevo contenedor
                     // -d lo corre en segundo plano, -p mapea el puerto (ej. 8080 de la app al 9090 del Mac)
-                    sh "docker run -d --name my-running-app -p 9090:8089 ${IMAGE_NAME}:${TAG}"
+                    sh "docker run -d --name my-running-app -p 9091:8089 ${IMAGE_NAME}:${TAG}"
                     
-                    echo "✅ Despliegue completado. App disponible en http://localhost:9090"
+                    echo "✅ Despliegue completado. App disponible en http://localhost:9091"
                 }
             }
         }
@@ -85,14 +85,14 @@ pipeline {
                     // Esperamos unos segundos a que el servidor de Go levante
                     sleep 5
                     
-                    // Intentamos conectar al puerto 9090 (host de Jenkins/Mac)
+                    // Intentamos conectar al puerto 9091 (host de Jenkins/Mac)
                     // Usamos la IP especial 'host.docker.internal' para salir del contenedor de Jenkins hacia el Mac
-                    def response = sh(script: "curl -s http://host.docker.internal:9090", returnStatus: true)
+                    def response = sh(script: "curl -s http://host.docker.internal:9091", returnStatus: true)
                     
                     if (response == 0) {
                         echo "✅ ¡Prueba exitosa! La aplicación responde correctamente."
                     } else {
-                        error "❌ La aplicación no responde en el puerto 9090."
+                        error "❌ La aplicación no responde en el puerto 9091."
                     }
                 }
             }
