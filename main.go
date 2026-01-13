@@ -12,7 +12,7 @@ func Sumar(a, b int) int {
 func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	fmt.Fprintf(w, "<h1>Hola Ruber</h1>\n")
-	fmt.Fprintf(w, "<p>La suma de 5 + 5 es: <strong>%d</strong></p>\n", Sumar(5, 5))
+	fmt.Fprintf(w, "<p>La suma de 10 + 10 es: <strong>%d</strong></p>\n", Sumar(10, 10))
 }
 
 func iniciarServidor() {
