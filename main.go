@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -15,10 +14,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "La suma de 5 + 5 es: %d\n", Sumar(5, 5))
 }
 
-func main() {
+func iniciarServidor() {
 	http.HandleFunc("/", handler)
-	log.Println("Server starting on port 8089...")
-	if err := http.ListenAndServe(":8089", nil); err != nil {
-		log.Fatal(err)
-	}
+	fmt.Println("Server starting on port 8080...")
+	http.ListenAndServe(":8080", nil)
+}
+
+func main() {
+	iniciarServidor()
 }
