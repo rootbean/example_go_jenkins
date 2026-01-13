@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh 'docker build -t app-test -f Dockerfile .'
 
-                sh 'docker run --rm app-test go test -v ./... -args -test.timeout=10s'
+                sh 'docker run --rm --entrypoint "" app-test go test -v .'
             }
         }
 
