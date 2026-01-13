@@ -16,8 +16,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func iniciarServidor() {
 	http.HandleFunc("/", handler)
-	fmt.Println("Server starting on port 8080...")
-	http.ListenAndServe(":8080", nil)
+	fmt.Println("Server starting on port 8089...")
+	http.ListenAndServe(":8089", nil)
 }
 
 func main() {

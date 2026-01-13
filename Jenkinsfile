@@ -61,8 +61,8 @@ pipeline {
                     
                     // 1. Detener y borrar el contenedor si ya existe uno corriendo
                     // El "|| true" es para que no falle si el contenedor no existe la primera vez
-                    sh "docker stop my-running-app || true"
-                    sh "docker rm my-running-app || true"
+                    sh "docker stop my-running-app 2>/dev/null || true"
+                    sh "docker rm my-running-app 2>/dev/null || true"
                     
                     // 2. Ejecutar el nuevo contenedor
                     // -d lo corre en segundo plano, -p mapea el puerto (ej. 8080 de la app al 9090 del Mac)
