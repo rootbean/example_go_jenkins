@@ -23,10 +23,12 @@ pipeline {
                     // Instala Docker y Git dentro del contenedor de Jenkins si no existen
                     sh '''
                         if ! command -v docker &> /dev/null; then
-                            apt-get update && apt-get install -y docker.io
+                            echo "Instalando Docker..."
+                            apk add --no-cache docker-cli
                         fi
                         if ! command -v git &> /dev/null; then
-                            apt-get install -y git
+                            echo "Instalando Git..."
+                            apk add --no-cache git
                         fi
                     '''
                 }
