@@ -37,9 +37,7 @@ pipeline {
       
         stage('Test') {
             steps {
-                sh 'docker build -t app-test -f Dockerfile .'
-
-                sh 'docker run --rm --entrypoint "" app-test go test -v .'
+                sh 'docker run --rm -v "$(pwd)":/app -w /app golang:1.25.5-alpine go test -v .'
             }
         }
 
