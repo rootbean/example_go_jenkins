@@ -1,0 +1,7 @@
+# Dockerfile.test
+FROM golang:1.25.5-alpine
+WORKDIR /app
+COPY . .
+# Solo descarga dependencias y prepara el entorno
+RUN go mod download
+# No ponemos CMD para que Jenkins decida qué ejecutar

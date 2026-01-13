@@ -37,19 +37,13 @@ pipeline {
       
         stage('Test') {
             steps {
-                // Creamos una imagen temporal de Go que contiene nuestro código actual
-                // Usamos una versión estable (1.22)
-                sh '''
-                    docker build -t ruber-go-tester -f - . <<EOF
-                    FROM golang:1.25.5-alpine
-                    WORKDIR /app
-                    COPY . .
-                    RUN go mod download
-                    EOF
-                '''
-        
-                // Ejecutamos los tests dentro de esa imagen recién creada
+                // 1. Construimos la imagen de test usando el nuevo archivo
+                sh 'docker build -t ruber-go-tester -f Dockerfile.test .'
+                
+                // 2. Ejecutamos el comando de test
+                // Esto garantiza que el go.mod esté presente y la versión sea la correcta
                 sh 'docker run --rm ruber-go-tester go test -v .'
+                
             }
         }
 
