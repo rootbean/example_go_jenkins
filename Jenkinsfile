@@ -38,7 +38,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Si esto falla, el deploy nunca ocurre
-                sh 'docker run --rm -v $(pwd):/app -w /app golang:1.25.5-alpine go test -v ./...'
+                sh 'docker run --rm -v "$(pwd)":/app -w /app golang:1.25.5-alpine go test -v ./...'
             }
         }
 
