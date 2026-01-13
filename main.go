@@ -1,12 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
 
 func Sumar(a, b int) int {
 	return a + b
 }
 
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Ruber in Go v2\n")
+	fmt.Fprintf(w, "La suma de 5 + 5 es: %d\n", Sumar(5, 5))
+}
+
 func main() {
-	fmt.Println("Ruber in Go v2")
-	fmt.Println("La suma de 5 + 5 es:", Sumar(5, 5))
+	http.HandleFunc("/", handler)
+	log.Println("Server starting on port 8080...")
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal(err)
+	}
 }
