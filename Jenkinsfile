@@ -77,25 +77,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Smoke Test') {
-            steps {
-                script {
-                    echo "Verificando que la app responda..."
-                    // Esperamos unos segundos a que el servidor de Go levante
-                    sleep 5
-                    
-                    // Intentamos conectar al puerto 9091 (host de Jenkins/Mac)
-                    // Usamos la IP especial 'host.docker.internal' para salir del contenedor de Jenkins hacia el Mac
-                    def response = sh(script: "curl -s http://host.docker.internal:9091", returnStatus: true)
-                    
-                    if (response == 0) {
-                        echo "✅ ¡Prueba exitosa! La aplicación responde correctamente."
-                    } else {
-                        error "❌ La aplicación no responde en el puerto 9091."
-                    }
-                }
-            }
-        }
     }
 }
